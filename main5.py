@@ -72,6 +72,9 @@ def edit_string_iterative(y, x, copy_cost=0, delete_cost=1, insert_cost=1, twidd
 def opt_string_change(c, z):
     b = list()
     start = c.shape
+    something = z.shape
+    print(start)
+    print(something)
     i = start[0] - 1
     j = start[1] - 1
     while i > 0 and j > 0:
