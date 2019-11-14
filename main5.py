@@ -1,5 +1,5 @@
 import numpy as np
-
+import sys
 
 # BRUTE FORCE
 # this does not give a min
@@ -97,6 +97,8 @@ def opt_string_change(c, z):
 
 
 if __name__ == '__main__':
+    np.set_printoptions(threshold=sys.maxsize)
+
     rowan = list('rowan')
     rowana = list('rowana')
     romance = list('romance')
@@ -114,23 +116,120 @@ if __name__ == '__main__':
     all_strings = [rowan, rowana, romance, rowantimestory, romanticstory, myrowanuniversity, rowanuniversitymy,
                    bacon, steakon, repair, ressair, tacos, french]
 
-    for string in all_strings:
-        for string_second in all_strings:
-            c, z = edit_string_iterative(string, string_second)
-            print(f'First string {string}, Second string {string_second}.')
-            print(c)
-            print(z)
-            b = opt_string_change(c, z)
-            print(b)
+    with open('output.txt', 'w+') as file:
+        c, z = edit_string_iterative(rowan, rowana)
+        b = opt_string_change(c, z)
+        file.write(f'First string {rowan}, Second string {rowana}.\n')
+        file.write('Cost Matrix\n')
+        file.write(np.array2string(c) + '\n')
+        file.write('Function Matrix\n')
+        file.write(np.array2string(z) + '\n')
+        file.write('List of opt functions : \n')
+        file.write(str(b) + '\n\n')
 
-    long_one = 'Studentsinthiscoursewillstudyefficientalgorithmsforsortingsearchinggraphssets' \
-               'matricesandotherapplicationsandwilllearntodesignandanalyzenewalgorithms'.lower()
-    long_two = 'Studentsthiscourseinwillstudyefficientalgorithmssortingsearchinggraphssets' \
-               'matricesforandotherapplicationswilllearntodesignandanalyzeandnewalgorithms'.lower()
+        c, z = edit_string_iterative(rowana, rowan)
+        b = opt_string_change(c, z)
+        file.write(f'First string {rowana}, Second string {rowan}.\n')
+        file.write('Cost Matrix\n')
+        file.write(np.array2string(c) + '\n')
+        file.write('Function Matrix\n')
+        file.write(np.array2string(z) + '\n')
+        file.write('List of opt functions : \n')
+        file.write(str(b) + '\n\n')
 
-    c, z = edit_string_iterative(long_one, long_two)
-    print('Long strings given on problem 5')
-    print(c)
-    print(z)
-    b = opt_string_change(c, z)
-    print(b)
+        c, z = edit_string_iterative(rowan, romance)
+        b = opt_string_change(c, z)
+        file.write(f'First string {rowan}, Second string {romance}.\n')
+        file.write('Cost Matrix\n')
+        file.write(np.array2string(c) + '\n')
+        file.write('Function Matrix\n')
+        file.write(np.array2string(z) + '\n')
+        file.write('List of opt functions : \n')
+        file.write(str(b) + '\n\n')
+
+        c, z = edit_string_iterative(romance, rowan)
+        b = opt_string_change(c, z)
+        file.write(f'First string {romance}, Second string {rowan}.\n')
+        file.write('Cost Matrix\n')
+        file.write(np.array2string(c) + '\n')
+        file.write('Function Matrix\n')
+        file.write(np.array2string(z) + '\n')
+        file.write('List of opt functions : \n')
+        file.write(str(b) + '\n\n')
+
+        c, z = edit_string_iterative(rowantimestory, romanticstory)
+        b = opt_string_change(c, z)
+        file.write(f'First string {rowantimestory}, Second string {romanticstory}.\n')
+        file.write('Cost Matrix\n')
+        file.write(np.array2string(c) + '\n')
+        file.write('Function Matrix\n')
+        file.write(np.array2string(z) + '\n')
+        file.write('List of opt functions : \n')
+        file.write(str(b) + '\n\n')
+
+        c, z = edit_string_iterative(romanticstory, rowantimestory)
+        b = opt_string_change(c, z)
+        file.write(f'First string {romanticstory}, Second string {rowantimestory}.\n')
+        file.write('Cost Matrix\n')
+        file.write(np.array2string(c) + '\n')
+        file.write('Function Matrix\n')
+        file.write(np.array2string(z) + '\n')
+        file.write('List of opt functions : \n')
+        file.write(str(b) + '\n\n')
+
+        c, z = edit_string_iterative(myrowanuniversity, rowanuniversitymy)
+        b = opt_string_change(c, z)
+        file.write(f'First string {myrowanuniversity}, Second string {rowanuniversitymy}.\n')
+        file.write('Cost Matrix\n')
+        file.write(np.array2string(c) + '\n')
+        file.write('Function Matrix\n')
+        file.write(np.array2string(z) + '\n')
+        file.write('List of opt functions : \n')
+        file.write(str(b) + '\n\n')
+
+        c, z = edit_string_iterative(rowanuniversitymy, myrowanuniversity)
+        b = opt_string_change(c, z)
+        file.write(f'First string {rowanuniversitymy}, Second string {myrowanuniversity}.\n')
+        file.write('Cost Matrix\n')
+        file.write(np.array2string(c) + '\n')
+        file.write('Function Matrix\n')
+        file.write(np.array2string(z) + '\n')
+        file.write('List of opt functions : \n')
+        file.write(str(b) + '\n\n')
+
+        long_one = 'Studentsinthiscoursewillstudyefficientalgorithmsforsortingsearchinggraphssets' \
+                   'matricesandotherapplicationsandwilllearntodesignandanalyzenewalgorithms'.lower()
+        long_two = 'Studentsthiscourseinwillstudyefficientalgorithmssortingsearchinggraphssets' \
+                   'matricesforandotherapplicationswilllearntodesignandanalyzeandnewalgorithms'.lower()
+
+        c, z = edit_string_iterative(long_one, long_two)
+        file.write('Long strings given on problem 5\n')
+        file.write(np.array2string(c, max_line_width=sys.maxsize))
+        file.write(np.array2string(z, max_line_width=sys.maxsize))
+        b = opt_string_change(c, z)
+        file.write('\n' + str(b))
+
+    with open('fulloutput.txt', 'a+') as file:
+        for string in all_strings:
+            for string_second in all_strings:
+                c, z = edit_string_iterative(string, string_second)
+                file.write(f'First string {string}, Second string {string_second}.\n')
+                file.write('Cost Matrix\n')
+                file.write(np.array2string(c) + '\n')
+                file.write('Function Matrix\n')
+                file.write(np.array2string(z) + '\n')
+                b = opt_string_change(c, z)
+                file.write('List of opt functions : \n')
+                file.write(str(b) + '\n\n')
+
+        long_one = 'Studentsinthiscoursewillstudyefficientalgorithmsforsortingsearchinggraphssets' \
+                   'matricesandotherapplicationsandwilllearntodesignandanalyzenewalgorithms'.lower()
+        long_two = 'Studentsthiscourseinwillstudyefficientalgorithmssortingsearchinggraphssets' \
+                   'matricesforandotherapplicationswilllearntodesignandanalyzeandnewalgorithms'.lower()
+
+        c, z = edit_string_iterative(long_one, long_two)
+        file.write('Long strings given on problem 5\n')
+        file.write(np.array2string(c, max_line_width=sys.maxsize))
+        file.write(np.array2string(z, max_line_width=sys.maxsize))
+        b = opt_string_change(c, z)
+        file.write('\n' + str(b))
