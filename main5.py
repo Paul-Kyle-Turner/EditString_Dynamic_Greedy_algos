@@ -36,7 +36,7 @@ def edit_string_naive(a, b):
 
 # THIS ALGORITHM ASSUMES COPY WILL ALWAYS BE SMALLEST
 # this algorithm runs at a O(nm) time
-def edit_string_iterative(y, x, copy_cost=0, delete_cost=1, insert_cost=1, twiddl_cost=1, replace_cost=1):
+def edit_string_iterative(x, y, copy_cost=0, delete_cost=1, insert_cost=1, twiddl_cost=1, replace_cost=1):
     n = len(y) + 1
     m = len(x) + 1
     c = np.zeros((m, n))
@@ -80,15 +80,15 @@ def opt_string_change(c, z):
     while i > 0 and j > 0:
         b.append(z[i][j])
         # copy or replace
-        if c[i-1][j-1] <= c[i-1][j] and c[i-1][j-1] <= c[i][j-1] and c[i-1][j-1] <= c[i-2][j-2]:
+        if z[i][j] == 'c' or z[i][j] == 'r':
             i -= 1
             j -= 1
         # twiddle
-        elif c[i-2][j-2] <= c[i-1][j-1] and c[i-2][j-2] <= c[i][j-1] and c[i-2][j-2] <= c[i-1][j]:
+        elif z[i][j] == 't':
             i -= 2
             j -= 2
         # up
-        elif c[i-1][j] <= c[i-1][j-1] and c[i-1][j] <= c[i][j-1] and c[i-1][j] <= c[i-2][j-2]:
+        elif z[i][j] == 'd':
             i -= 1
         # left
         else:
